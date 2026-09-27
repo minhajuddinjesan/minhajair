@@ -1,0 +1,444 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Minhaj Air — Aerial Cinematography for Your Day</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,600;12..96,700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#141414;
+    --ink-soft:#5B5B5B;
+    --line:#E4E4E1;
+    --paper:#FFFFFF;
+    --panel:#F2F2EF;
+    --panel-2:#EAEAE6;
+    --gold:#C4922C;
+    --sky:#3E6DA6;
+  }
+  *{box-sizing:border-box;margin:0;padding:0;}
+  html{scroll-behavior:smooth;}
+  body{
+    background:var(--paper);
+    color:var(--ink);
+    font-family:'Inter',sans-serif;
+    line-height:1.55;
+  }
+  h1,h2,h3,.display{
+    font-family:'Bricolage Grotesque',sans-serif;
+    font-weight:600;
+    letter-spacing:-0.01em;
+  }
+  a{color:inherit;text-decoration:none;}
+  img{max-width:100%;display:block;}
+  button{font-family:inherit;}
+
+  header{
+    position:sticky; top:0; z-index:100;
+    background:rgba(255,255,255,0.92);
+    backdrop-filter:blur(8px);
+    border-bottom:1px solid var(--line);
+  }
+  nav{
+    max-width:1400px; margin:0 auto; padding:16px 40px;
+    display:flex; align-items:center; justify-content:space-between;
+  }
+  .logo{
+    font-family:'Bricolage Grotesque',sans-serif;
+    font-weight:700; font-size:17px; letter-spacing:-0.01em;
+    display:flex; align-items:baseline; gap:8px;
+  }
+  .logo span{
+    font-family:'Inter',sans-serif; font-weight:500; font-size:10px;
+    color:var(--ink-soft); letter-spacing:0.1em; text-transform:uppercase;
+  }
+  .navlinks{display:flex; gap:32px; font-size:13.5px; color:var(--ink);}
+  .navlinks a{transition:color .2s;}
+  .navlinks a:hover{color:var(--gold);}
+  .navcta{
+    font-size:13px; font-weight:600; color:#fff;
+    background:var(--ink); padding:9px 20px; border-radius:2px;
+  }
+  .navcta:hover{background:var(--gold);}
+
+  .hero{max-width:1400px; margin:24px auto 0; padding:0 24px;}
+  .hero-banner{
+    position:relative;
+    background:linear-gradient(115deg,#EDEEF3 0%, #DCE2EE 45%, #EFECE3 100%);
+    border-radius:2px;
+    min-height:420px;
+    display:flex; align-items:center; justify-content:center;
+    overflow:hidden;
+  }
+  .hero-banner-content{text-align:center; padding:60px 20px; position:relative; z-index:2;}
+  .hero-eyebrow{font-size:12px; letter-spacing:0.14em; text-transform:uppercase; color:var(--ink-soft); margin-bottom:14px;}
+  .hero-banner h1{font-size:clamp(30px,4.4vw,52px); margin-bottom:10px; letter-spacing:0;}
+  .hero-banner h1 b{color:var(--gold); font-weight:700;}
+  .hero-banner p{font-size:15px; color:var(--ink-soft); margin-bottom:26px;}
+  .hero-actions{display:flex; gap:14px; justify-content:center;}
+  .btn-primary{
+    background:var(--ink); color:#fff; font-weight:600; font-size:13.5px;
+    padding:13px 28px; border-radius:2px; border:none; cursor:pointer;
+    transition:background .2s;
+  }
+  .btn-primary:hover{background:var(--gold);}
+  .btn-ghost{
+    border:1px solid #C9C9C4; color:var(--ink); font-weight:500; font-size:13.5px;
+    padding:12px 26px; border-radius:2px; cursor:pointer; background:transparent;
+    transition:border-color .2s, background .2s;
+  }
+  .btn-ghost:hover{border-color:var(--ink); background:rgba(0,0,0,0.03);}
+
+  .tile-grid{
+    max-width:1400px; margin:24px auto 0; padding:0 24px;
+    display:grid; grid-template-columns:1fr 1fr; gap:2px;
+  }
+  .tile{position:relative; min-height:340px; padding:38px; display:flex; flex-direction:column; justify-content:flex-start; overflow:hidden;}
+  .tile.light{background:var(--panel);}
+  .tile.light2{background:var(--panel-2);}
+  .tile.dark{background:var(--ink); color:#fff;}
+  .tile-kicker{font-size:11px; letter-spacing:0.12em; text-transform:uppercase; color:var(--ink-soft); margin-bottom:8px;}
+  .tile.dark .tile-kicker{color:#9A9A9A;}
+  .tile h3{font-size:22px; margin-bottom:6px;}
+  .tile p{font-size:13.5px; color:var(--ink-soft); max-width:320px; margin-bottom:14px;}
+  .tile.dark p{color:#B9B9B9;}
+  .tile-links{display:flex; gap:16px; font-size:13px; font-weight:500;}
+  .tile-links a{border-bottom:1px solid currentColor; padding-bottom:1px;}
+
+  .strip{max-width:1400px; margin:64px auto; padding:0 24px;}
+  .strip-head{margin-bottom:36px; max-width:560px;}
+  .kicker{font-size:11px; letter-spacing:0.14em; text-transform:uppercase; color:var(--gold); margin-bottom:12px; display:block; font-weight:600;}
+  .strip-head h2{font-size:clamp(24px,3vw,32px); margin-bottom:10px;}
+  .strip-head p{color:var(--ink-soft); font-size:14.5px;}
+  .process{display:grid; grid-template-columns:repeat(4,1fr); gap:0; border-top:1px solid var(--line);}
+  .process-step{padding:28px 24px 0 0; border-right:1px solid var(--line);}
+  .process-step:last-child{border-right:none;}
+  .process-step .step-n{font-family:'Bricolage Grotesque',sans-serif; font-size:13px; color:var(--gold); font-weight:600; margin-bottom:12px; display:block;}
+  .process-step h3{font-size:15.5px; margin-bottom:8px;}
+  .process-step p{font-size:13px; color:var(--ink-soft);}
+
+  .reel-primary{
+    position:relative; aspect-ratio:16/7; border-radius:2px; overflow:hidden;
+    background:linear-gradient(120deg,#20242B,#12141A);
+    margin-bottom:2px;
+    display:flex; align-items:center; justify-content:center;
+  }
+  .reel-primary video{width:100%; height:100%; object-fit:cover; display:block;}
+  .reel-placeholder{text-align:center; color:#9A9A9A; padding:40px;}
+  .play-btn{width:68px; height:68px; border-radius:50%; border:1.5px solid #fff; display:flex; align-items:center; justify-content:center; margin:0 auto 16px; cursor:pointer;}
+  .play-btn svg{margin-left:3px;}
+
+  .gallery-strip{display:grid; grid-template-columns:1.4fr 1fr 1fr 1fr 1fr 1fr 1fr; gap:2px; max-width:1400px; margin:0 auto; padding:0;}
+  .gallery-thumb{aspect-ratio:3/4; overflow:hidden; position:relative; background:var(--panel);}
+  .gallery-thumb img{width:100%; height:100%; object-fit:cover;}
+  .gallery-thumb-fallback{width:100%; height:100%; display:flex; align-items:flex-end; padding:12px; font-size:11px; color:#fff; background:linear-gradient(160deg,#4A5568,#1A202C);}
+
+  .about{max-width:1400px; margin:80px auto; padding:0 24px; display:grid; grid-template-columns:1fr 1fr; gap:70px; align-items:center;}
+  .about-visual{aspect-ratio:4/5; border-radius:2px; background:linear-gradient(160deg,#EDEEF3,#DCE2EE); position:relative; overflow:hidden;}
+  .about-visual-label{position:absolute; bottom:24px; left:24px; font-size:11px; color:var(--ink-soft); letter-spacing:0.08em; text-transform:uppercase; background:rgba(255,255,255,0.85); padding:6px 10px;}
+  .about-text h2{font-size:clamp(26px,3.2vw,34px); margin-bottom:18px; line-height:1.15;}
+  .about-text p{color:var(--ink-soft); font-size:14.5px; margin-bottom:16px;}
+  .about-stats{display:flex; gap:36px; margin-top:28px;}
+  .about-stat b{font-family:'Bricolage Grotesque',sans-serif; font-size:24px; color:var(--gold); display:block; margin-bottom:2px;}
+  .about-stat span{font-size:12.5px; color:var(--ink-soft);}
+
+  .trust-strip{max-width:1400px; margin:0 auto; padding:44px 24px; border-top:1px solid var(--line); border-bottom:1px solid var(--line); display:grid; grid-template-columns:repeat(3,1fr); gap:40px;}
+  .trust-item p{font-size:13.5px; color:var(--ink); font-style:italic; margin-bottom:12px;}
+  .trust-item span{font-size:12px; color:var(--ink-soft);}
+
+  .booking-wrap{max-width:1400px; margin:80px auto; padding:0 24px;}
+  .booking{background:var(--panel); border-radius:2px; display:grid; grid-template-columns:0.85fr 1.15fr; overflow:hidden;}
+  .booking-info{padding:56px;}
+  .booking-info h2{font-size:28px; margin-bottom:16px;}
+  .booking-info p{color:var(--ink-soft); font-size:14px; margin-bottom:28px;}
+  .booking-list{list-style:none;}
+  .booking-list li{display:flex; align-items:center; gap:10px; font-size:13.5px; color:var(--ink-soft); padding:11px 0; border-top:1px solid var(--line);}
+  .booking-list li:first-child{border-top:none;}
+  .booking-list li::before{content:'—'; color:var(--gold);}
+  .booking-form{padding:56px; background:var(--paper);}
+  .form-row{display:grid; grid-template-columns:1fr 1fr; gap:14px; margin-bottom:14px;}
+  .field{margin-bottom:14px;}
+  .field label{display:block; font-size:11px; letter-spacing:0.05em; text-transform:uppercase; color:var(--ink-soft); margin-bottom:7px;}
+  .field input, .field select, .field textarea{width:100%; background:var(--paper); border:1px solid #D5D5D0; color:var(--ink); padding:12px 13px; border-radius:2px; font-family:'Inter',sans-serif; font-size:14px;}
+  .field input:focus, .field select:focus, .field textarea:focus{outline:none; border-color:var(--gold);}
+  .field textarea{resize:vertical; min-height:80px;}
+  .submit-btn{width:100%; margin-top:6px;}
+
+  footer{padding:56px 24px 36px; border-top:1px solid var(--line);}
+  .footer-inner{max-width:1400px; margin:0 auto;}
+  .footer-top{display:flex; justify-content:space-between; flex-wrap:wrap; gap:40px; margin-bottom:44px;}
+  .footer-brand p{color:var(--ink-soft); font-size:13px; max-width:280px; margin-top:12px;}
+  .footer-cols{display:flex; gap:56px; flex-wrap:wrap;}
+  .footer-col h4{font-size:11px; letter-spacing:0.1em; text-transform:uppercase; color:var(--ink-soft); margin-bottom:16px; font-weight:600;}
+  .footer-col a{display:block; font-size:13.5px; color:var(--ink); margin-bottom:11px;}
+  .footer-col a:hover{color:var(--gold);}
+  .footer-bottom{display:flex; justify-content:space-between; flex-wrap:wrap; gap:12px; padding-top:22px; border-top:1px solid var(--line); font-size:12px; color:var(--ink-soft);}
+
+  .sticky-cta{display:none;}
+
+  @media (max-width: 900px){
+    .navlinks{display:none;}
+    .tile-grid{grid-template-columns:1fr;}
+    .process{grid-template-columns:1fr 1fr;}
+    .process-step{border-right:none; border-bottom:1px solid var(--line); padding-bottom:24px;}
+    .gallery-strip{grid-template-columns:repeat(3,1fr);}
+    .about{grid-template-columns:1fr;}
+    .trust-strip{grid-template-columns:1fr; gap:24px;}
+    .booking{grid-template-columns:1fr;}
+    .form-row{grid-template-columns:1fr;}
+    .sticky-cta{display:flex; position:fixed; bottom:0; left:0; right:0; z-index:99; background:#fff; border-top:1px solid var(--line); padding:12px 16px; justify-content:center;}
+    .sticky-cta a{background:var(--ink); color:#fff; font-weight:600; font-size:13.5px; padding:13px 26px; border-radius:2px; width:100%; text-align:center;}
+    body{padding-bottom:60px;}
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <nav>
+    <div class="logo">MINHAJ AIR <span>Minhaj Group</span></div>
+    <div class="navlinks">
+      <a href="#services">Services</a>
+      <a href="#reel">Gallery</a>
+      <a href="#process">Process</a>
+      <a href="#about">About</a>
+    </div>
+    <a href="#book" class="navcta">Book a date</a>
+  </nav>
+</header>
+
+<div class="sticky-cta"><a href="#book">Book a date</a></div>
+
+<section class="hero">
+  <div class="hero-banner">
+    <div class="hero-banner-content">
+      <div class="hero-eyebrow">Aerial cinematography · Antwerp &amp; across Belgium</div>
+      <h1>MINHAJ AIR — <b>Seen From Above</b></h1>
+      <p>Cinematic drone films for weddings, ceremonies and events that people ask to watch again</p>
+      <div class="hero-actions">
+        <a href="#book" class="btn-primary">Book your date</a>
+        <a href="#reel" class="btn-ghost">Watch the reel</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="tile-grid" id="services">
+  <div class="tile light">
+    <div class="tile-kicker">Weddings</div>
+    <h3>Wedding &amp; Walima Films</h3>
+    <p>Full-day aerial coverage from arrival to send-off, cut into a cinematic highlight reel.</p>
+    <div class="tile-links"><a href="#book">Learn more</a><a href="#book">Book now</a></div>
+  </div>
+  <div class="tile light2">
+    <div class="tile-kicker">Ceremonies</div>
+    <h3>Religious &amp; Cultural Ceremonies</h3>
+    <p>Quiet, respectful operation for milad, aqiqah and gaye holud — footage that captures the scale.</p>
+    <div class="tile-links"><a href="#book">Learn more</a><a href="#book">Book now</a></div>
+  </div>
+  <div class="tile dark">
+    <div class="tile-kicker">Corporate</div>
+    <h3>Corporate &amp; Brand Events</h3>
+    <p>Launches, conferences and openings, shot and delivered ready for your marketing.</p>
+    <div class="tile-links"><a href="#book">Learn more</a><a href="#book">Book now</a></div>
+  </div>
+  <div class="tile light">
+    <div class="tile-kicker">Real estate</div>
+    <h3>Property &amp; Venue Reveals</h3>
+    <p>Sweeping exterior shots for listings, developments and hospitality venues.</p>
+    <div class="tile-links"><a href="#book">Learn more</a><a href="#book">Book now</a></div>
+  </div>
+</div>
+
+<div class="strip" id="process">
+  <div class="strip-head">
+    <span class="kicker">Process</span>
+    <h2>Booking is four short steps</h2>
+    <p>From first message to finished film, here's what happens.</p>
+  </div>
+  <div class="process">
+    <div class="process-step">
+      <span class="step-n">01</span>
+      <h3>Tell us the date</h3>
+      <p>Send your event date, venue and the shots you want captured.</p>
+    </div>
+    <div class="process-step">
+      <span class="step-n">02</span>
+      <h3>We check the site</h3>
+      <p>Airspace, venue permission and weather windows reviewed beforehand.</p>
+    </div>
+    <div class="process-step">
+      <span class="step-n">03</span>
+      <h3>Fly on the day</h3>
+      <p>Our pilot arrives early, shoots quietly, and stays out of the way of your guests.</p>
+    </div>
+    <div class="process-step">
+      <span class="step-n">04</span>
+      <h3>Get your film</h3>
+      <p>A graded highlight film lands in your inbox within 48 hours.</p>
+    </div>
+  </div>
+</div>
+
+<div class="strip" id="reel" style="margin-top:0;">
+  <div class="strip-head">
+    <span class="kicker">Recent work</span>
+    <h2>See it before you book it</h2>
+    <p>A few frames from recent flights — full films are shared with every client after the event.</p>
+  </div>
+  <div class="reel-primary">
+    <video controls style="display:none;" id="mainReel">
+      <source src="" type="video/mp4">
+    </video>
+    <div class="reel-placeholder" id="reelPlaceholder">
+      <div class="play-btn">
+        <svg width="18" height="18" viewBox="0 0 18 18" fill="none"><path d="M5 3L15 9L5 15V3Z" fill="#fff"/></svg>
+      </div>
+      <p style="font-size:13.5px;">Drop your showreel video here — replace the empty &lt;source&gt; with your file</p>
+    </div>
+  </div>
+  <div class="gallery-strip">
+    <div class="gallery-thumb"><div class="gallery-thumb-fallback">Wedding — Antwerp</div></div>
+    <div class="gallery-thumb"><div class="gallery-thumb-fallback">Gaye holud</div></div>
+    <div class="gallery-thumb"><div class="gallery-thumb-fallback">Eid gathering</div></div>
+    <div class="gallery-thumb"><div class="gallery-thumb-fallback">Corporate launch</div></div>
+    <div class="gallery-thumb"><div class="gallery-thumb-fallback">Venue reveal</div></div>
+    <div class="gallery-thumb"><div class="gallery-thumb-fallback">Reception</div></div>
+    <div class="gallery-thumb"><div class="gallery-thumb-fallback">Ceremony close</div></div>
+  </div>
+</div>
+
+<div class="about" id="about">
+  <div class="about-visual">
+    <div class="about-visual-label">Minhaj Air — Flight Log</div>
+  </div>
+  <div class="about-text">
+    <span class="kicker">About Minhaj Air</span>
+    <h2>Part of the Minhaj Group</h2>
+    <p>Minhaj Air is the aerial cinematography arm of Minhaj Group, built to bring the same standard we hold across our ventures to how your event is remembered.</p>
+    <p>We fly licensed equipment with certified pilots, and we plan every shoot around the people and rules of the venue first — the footage comes second to doing it properly.</p>
+    <div class="about-stats">
+      <div class="about-stat"><b>2</b><span>Countries served</span></div>
+      <div class="about-stat"><b>120+</b><span>Events flown</span></div>
+      <div class="about-stat"><b>4.9</b><span>Average rating</span></div>
+    </div>
+  </div>
+</div>
+
+<div class="trust-strip">
+  <div class="trust-item">
+    <p>"We didn't know what we were missing until we saw the aerial shots of the whole wedding hall."</p>
+    <span>— Client, wedding, Antwerp</span>
+  </div>
+  <div class="trust-item">
+    <p>"Quiet and professional — nobody at the ceremony even noticed the drone."</p>
+    <span>— Client, ceremony, Brussels</span>
+  </div>
+  <div class="trust-item">
+    <p>"Fast turnaround, and better quality than a full production company we paid before."</p>
+    <span>— Client, corporate event</span>
+  </div>
+</div>
+
+<div class="booking-wrap" id="book">
+  <div class="booking">
+    <div class="booking-info">
+      <span class="kicker">Booking</span>
+      <h2>Get your date on the flight schedule</h2>
+      <p>Weekend dates fill fast, especially in wedding season. Send your details and we'll confirm availability within a day.</p>
+      <ul class="booking-list">
+        <li>Free consultation call</li>
+        <li>Fixed quote before booking</li>
+        <li>Licensed, insured pilots</li>
+        <li>Highlight film within 48 hours</li>
+      </ul>
+    </div>
+    <div class="booking-form">
+      <form id="bookingForm">
+        <div class="form-row">
+          <div class="field">
+            <label for="name">Full name</label>
+            <input type="text" id="name" name="name" placeholder="Your name" required>
+          </div>
+          <div class="field">
+            <label for="phone">Phone</label>
+            <input type="tel" id="phone" name="phone" placeholder="+32 ..." required>
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="field">
+            <label for="date">Event date</label>
+            <input type="date" id="date" name="date" required>
+          </div>
+          <div class="field">
+            <label for="type">Event type</label>
+            <select id="type" name="type">
+              <option>Wedding</option>
+              <option>Religious / cultural ceremony</option>
+              <option>Corporate event</option>
+              <option>Property / real estate</option>
+              <option>Other</option>
+            </select>
+          </div>
+        </div>
+        <div class="field">
+          <label for="venue">Venue / city</label>
+          <input type="text" id="venue" name="venue" placeholder="Venue name and city">
+        </div>
+        <div class="field">
+          <label for="message">Anything else we should know?</label>
+          <textarea id="message" name="message" placeholder="Guest count, timings, specific shots you want"></textarea>
+        </div>
+        <button type="submit" class="btn-primary submit-btn">Request booking</button>
+      </form>
+    </div>
+  </div>
+</div>
+
+<footer>
+  <div class="footer-inner">
+    <div class="footer-top">
+      <div class="footer-brand">
+        <div class="logo">MINHAJ AIR</div>
+        <p>Aerial cinematography for weddings, ceremonies and events. Part of the Minhaj Group.</p>
+      </div>
+      <div class="footer-cols">
+        <div class="footer-col">
+          <h4>Services</h4>
+          <a href="#services">Weddings</a>
+          <a href="#services">Ceremonies</a>
+          <a href="#services">Corporate</a>
+          <a href="#services">Real estate</a>
+        </div>
+        <div class="footer-col">
+          <h4>Studio</h4>
+          <a href="#about">About</a>
+          <a href="#reel">Our work</a>
+          <a href="#process">How it works</a>
+        </div>
+        <div class="footer-col">
+          <h4>Contact</h4>
+          <a href="mailto:hello@minhajair.com">hello@minhajair.com</a>
+          <a href="tel:+32000000000">+32 000 00 00 00</a>
+          <a href="#book">Book a date</a>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2026 Minhaj Air, a Minhaj Group company.</span>
+      <span>Antwerp, Belgium</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+  document.getElementById('bookingForm').addEventListener('submit', function(e){
+    e.preventDefault();
+    alert('Thanks — this form is a template. Connect it to email or a Google Sheet to start receiving real bookings.');
+  });
+</script>
+
+</body>
+</html>
